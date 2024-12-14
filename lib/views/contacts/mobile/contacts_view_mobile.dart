@@ -1,9 +1,10 @@
-import 'package:circle_checkbox/redev_checkbox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_native_contact_picker/flutter_native_contact_picker.dart';
+import 'package:flutter_native_contact_picker/model/contact.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:fluttercontactpicker/fluttercontactpicker.dart';
+import 'package:hoco/views/contacts/mobile/widgets/cc/redev_checkbox.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/constants/design_values.dart';
@@ -438,13 +439,19 @@ class ContactsViewMobileState extends State<ContactsViewMobile>
 
   Future _onTapImportContact(int position) async {
     try {
-      final PhoneContact contact =
-          await FlutterContactPicker.pickPhoneContact();
-      if (contact.fullName != null) {
-        _contactsNameTECList[position].text = contact.fullName!;
+      final FlutterNativeContactPicker _contactPicker =
+      FlutterNativeContactPicker();
+
+      // final Contact? contact =
+      //     await FlutterNativeContactPicker.selectContact();
+
+      Contact? contact = await _contactPicker.selectContact();
+
+      if (contact?.fullName != null) {
+        _contactsNameTECList[position].text = contact?.fullName ?? '';
       }
-      if (contact.phoneNumber != null && contact.phoneNumber!.number != null) {
-        String number = contact.phoneNumber!.number!.replaceAll(' ', '');
+      if (contact?.phoneNumbers != null) {
+        String number = (contact?.phoneNumbers?.first ?? '').replaceAll(' ', '');
         if (number.contains('+98')) number = number.replaceFirst('+98', '0');
         if (number.length == 11) {
           _contactsPhoneTECList[position].text = number;

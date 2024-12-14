@@ -1,9 +1,9 @@
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screen_lock/flutter_screen_lock.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:hoco/providers/widgets/fsl/src/functions.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:local_auth_android/local_auth_android.dart';
 
@@ -84,7 +84,7 @@ class SplashProvider extends ChangeNotifier {
     screenLock(
       context: kNavigatorKey.currentContext!,
       correctString: _mainProvider.appSettings.appPassword,
-      digits: 6,
+      // digits: 6,
       title: Padding(
         padding: EdgeInsets.only(bottom: 16.h),
         child: Text(
@@ -115,10 +115,10 @@ class SplashProvider extends ChangeNotifier {
       cancelButton: const Icon(Icons.close),
       deleteButton: const Icon(Icons.delete),
       canCancel: false,
-      didError: (c) {
+      onError: (c) {
         toastGenerator(translate('wrong_pass'));
       },
-      didUnlocked: _initialRouteHandler,
+      onUnlocked: _initialRouteHandler,
     );
   }
 
