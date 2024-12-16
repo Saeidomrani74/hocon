@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_sms_listener/flutter_sms_listener.dart';
+import 'package:sms_advanced/sms_advanced.dart';
 import 'package:supercharged/supercharged.dart';
 
 import '../core/constants/constants.dart';
@@ -19,7 +19,7 @@ class MainProvider extends ChangeNotifier {
   late AppSettings appSettings;
   //SharedPreferences? _sharedPreferences;
   bool smsCooldownFinished = true;
-  FlutterSmsListener smsListener = FlutterSmsListener();
+  SmsReceiver smsListener = SmsReceiver();
   int get deviceListLength => devices.length;
 
   void setSelectedDevice() {

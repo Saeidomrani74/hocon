@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_sms_listener/flutter_sms_listener.dart';
+import 'package:sms_advanced/sms_advanced.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:hoco/widgets/dialogs/editable_dialog_widget.dart';
 
@@ -107,8 +107,8 @@ class ChargeDeviceProvider extends ChangeNotifier {
             onPressAccept: () async {
               await processChargeAmountSMS(
                 SmsMessage(
-                  address: _mainProvider.selectedDevice.devicePhone,
-                  body: inquiryDialogTEC.text,
+                  _mainProvider.selectedDevice.devicePhone,
+                  inquiryDialogTEC.text,
                 ),
               );
               inquiryDialogTEC.clear();
